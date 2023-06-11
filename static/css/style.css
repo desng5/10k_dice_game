@@ -1,80 +1,49 @@
-#players {
+#game-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#player-names {
   margin-bottom: 20px;
 }
 
-#game {
-  margin: 0 auto;
-  width: 400px;
-  height: 500px;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+#name-inputs {
+  margin-top: 10px;
 }
 
-#diceContainer {
+#dice-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .dice {
-  width: 60px;
-  height: 60px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  font-size: 24px;
 }
 
-.dice1 {
-  background-image: url('/static/images/dice1.png');
+#player-scores {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.dice2 {
-  background-image: url('/static/images/dice2.png');
+#game-messages {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.dice3 {
-  background-image: url('/static/images/dice3.png');
-}
-
-.dice4 {
-  background-image: url('/static/images/dice4.png');
-}
-
-.dice5 {
-  background-image: url('/static/images/dice5.png');
-}
-
-.dice6 {
-  background-image: url('/static/images/dice6.png');
-}
-
-#rollButton {
-  font-size: 18px;
+#roll-button {
+  display: none;
+  margin-top: 20px;
+  font-size: 16px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#rollButton:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-#scoreContainer {
-  text-align: left;
-}
-
-#scoreContainer h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
 }
