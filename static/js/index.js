@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const playerNames = [];
     const playerScores = [];
     let currentPlayer = 0;
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const playerScoresContainer = document.getElementById("player-scores");
     const gameMessages = document.getElementById("game-messages");
 
-    playerNamesButton.addEventListener("click", function() {
+    playerNamesButton.addEventListener("click", function () {
         const numPlayers = parseInt(numPlayersInput.value);
         if (numPlayers < 1 || numPlayers > 4) {
             alert("Please enter a number between 1 and 4 for the number of players.");
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
         startGameButton.style.display = "block";
     });
 
-    startGameButton.addEventListener("click", function() {
+    startGameButton.addEventListener("click", function () {
         const nameInputs = nameInputsContainer.getElementsByTagName("input");
         for (let i = 0; i < nameInputs.length; i++) {
             const playerName = nameInputs[i].value.trim();
@@ -55,28 +55,45 @@ document.addEventListener("DOMContentLoaded", function() {
         diceContainer.style.display = "block";
         playerScoresContainer.style.display = "block";
         rollButton.style.display = "block";
+        rollButton.disabled = false;
 
         updatePlayerScoresUI();
     });
 
-    rollButton.addEventListener("click", function() {
+    rollButton.addEventListener("click", function () {
         const dice = rollDice();
         const score = calculateScore(dice);
-
+    
         playerScores[currentPlayer] += score;
-
+    
         // Update UI
         updateDiceUI(dice);
         updatePlayerScoresUI();
-
+    
         if (playerScores[currentPlayer] >= 10000) {
             gameMessages.textContent = playerNames[currentPlayer] + " wins the game!";
             rollButton.disabled = true;
             return;
         }
-
+    
         currentPlayer = (currentPlayer + 1) % playerNames.length;
     });
+    
+    function updateDiceUI(dice) {
+        diceContainer.innerHTML = "";
+        for (const value of dice) {
+            const diceElement = document.createElement("img");
+            diceElement.classList.add("dice");
+            diceElement.src = "/static/images/dice1.png";
+            diceElement.src = "/static/images/dice2.png";
+            diceElement.src = "/static/images/dice2.png";
+            diceElement.src = "/static/images/dice4.png";
+            diceElement.src = "/static/images/dice5.png";
+            diceElement.src = "/static/images/dice6.png";
+            diceContainer.appendChild(diceElement);
+        }
+    }
+    
 
     function rollDice() {
         const dice = [];
@@ -113,6 +130,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Three of a Kind of 4 or 5
+        
+        if (count[2] >= 3) {
+            score += 200;
+            count[2] -= 3;
+        }
+        if (count[3] >= 3) {
+            score += 300;
+            count[3] -= 3;
+        }
         if (count[4] >= 3) {
             score += 400;
             count[4] -= 3;
@@ -133,9 +159,9 @@ document.addEventListener("DOMContentLoaded", function() {
     function updateDiceUI(dice) {
         diceContainer.innerHTML = "";
         for (const value of dice) {
-            const diceElement = document.createElement("div");
+            const diceElement = document.createElement("img");
             diceElement.classList.add("dice");
-            diceElement.style.backgroundImage = "url('images/dice" + value + ".png')";
+            diceElement.src = "./static/images/dice" + value + ".png";
             diceContainer.appendChild(diceElement);
         }
     }
