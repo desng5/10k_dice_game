@@ -6,7 +6,6 @@ class Player {
     }
   
     rollDice() {
-
       const dice = [];
       for (let i = 0; i < 6; i++) {
         dice.push(Math.floor(Math.random() * 6) + 1);
@@ -19,18 +18,15 @@ class Player {
     }
   }
   
- 
   function hasStraight(dice) {
     return dice.length === 6 && new Set(dice).size === 6;
   }
   
-  // Function to check if a roll contains three of a kind
   function hasThreeOfKind(dice, value) {
     const count = dice.filter((d) => d === value).length;
     return count >= 3;
   }
   
-
   function calculateScore(dice) {
     let score = 0;
   
@@ -62,7 +58,6 @@ class Player {
     return score;
   }
   
-
   function addPlayer(name) {
     const player = new Player(name);
     players.push(player);
@@ -71,13 +66,11 @@ class Player {
     document.getElementById('players').appendChild(playerElement);
   }
   
-
   function updatePlayerScore(player) {
     const playerElement = document.querySelector(`#players div:contains(${player.name})`);
     playerElement.textContent = `${player.name}: ${player.score}`;
   }
   
-
   function animateDice() {
     const diceElements = document.querySelectorAll('.dice');
     const rollButton = document.getElementById('rollButton');
@@ -113,8 +106,8 @@ class Player {
       rollButton.disabled = false;
     }, 1000);
   }
+
   
-  // Start the game
   const players = [];
   let currentPlayerIndex = 0;
   let currentPlayer = null;
