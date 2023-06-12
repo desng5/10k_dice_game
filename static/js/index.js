@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const playerNamesButton = document.getElementById("player-names-button");
     const startGameButton = document.getElementById("start-game-button");
     const nameInputsContainer = document.getElementById("name-inputs");
-    const audioContainer = document.getElementById("audio-container");
     const rollButton = document.getElementById("roll-button");
     const diceContainer = document.getElementById("dice-container");
     const playerScoresContainer = document.getElementById("player-scores");
     const gameMessages = document.getElementById("game-messages");
+    
     // const newGameButton = document.getElementById("new-game-btn")
   
     playerNamesButton.addEventListener("click", function () {
@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
     startGameButton.addEventListener("click", function () {
         const nameInputs = nameInputsContainer.getElementsByTagName("input");
         for (let i = 0; i < nameInputs.length; i++) {
-          const playerName = nameInputs[i].value.trim();
-          if (!playerName) {
-            alert("Please enter names for all players!");
-            return;
-          }
-          playerNames[i] = "Player " + (i + 1) + ": " + playerName;
-          playerScores[i] = 0;
+            const playerName = nameInputs[i].value.trim();
+            if (!playerName) {
+                alert("Please enter names for all players!");
+                return;
+            }
+            playerNames[i] = "Player " + (i + 1) + " > " + playerName;
+            playerScores[i] = 0 ;
         }
 
         // Hide input fields and buttons
@@ -64,36 +64,32 @@ document.addEventListener("DOMContentLoaded", function () {
         rollButton.disabled = false;
 
         updatePlayerScoresUI();
-});
     });
 
+   
+    const audioElement = new Audio("/static/audio/dice-142528.mp3");
 
     rollButton.addEventListener("click", function () {
+        // Play the dice roll sound
+        audioElement.play();
+      
         const dice = rollDice();
         const score = calculateScore(dice);
-    
+      
         playerScores[currentPlayer] += score;
+      
     
         // Update UI
         updateDiceUI(dice);
         updatePlayerScoresUI();
-    
+      
         if (playerScores[currentPlayer] >= 10000) {
-            gameMessages.textContent = playerNames[currentPlayer]+ " is the winner!";
-            rollButton.disabled = true;
-            // newGameButton.style.display = "block";
-            return;
+          gameMessages.textContent = playerNames[currentPlayer] + " wins the game!";
+          rollButton.disabled = true;
+          return;
         }
         //cycle through order of players turns
         currentPlayer = (currentPlayer + 1) % playerNames.length;
-
-        const audioElement = document.createElement("audio");
-        audioElement.id = "dice-sound";
-        audioElement.src = "/static/audio/dice-142528.mp3";
-        audioContainer.appendChild(audioElement);
-
-        // Play the dice roll sound
-        audioElement.play();
     });
     
     // Reset the game and clear UI elements
