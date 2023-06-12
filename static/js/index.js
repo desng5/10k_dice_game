@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Please enter names for all players!");
                 return;
             }
-            playerNames[i] = "Player " + (i + 1) + "  _ " + playerName;
+            playerNames[i] = "Player " + (i + 1) + " > " + playerName;
             playerScores[i] = 0 ;
         }
 
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updatePlayerScoresUI();
     
         if (playerScores[currentPlayer] >= 10000) {
-            gameMessages.textContent = playerNames[currentPlayer]+ " wins the game!";
+            gameMessages.textContent = playerNames[currentPlayer]+ " is the winner!";
             rollButton.disabled = true;
             // newGameButton.style.display = "block";
             return;
