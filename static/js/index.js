@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const playerNames = [];
     const playerScores = [];
     let currentPlayer = 0;
-
+  
     const numPlayersInput = document.getElementById("num-players");
     const playerNamesButton = document.getElementById("player-names-button");
     const startGameButton = document.getElementById("start-game-button");
@@ -13,28 +13,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const diceContainer = document.getElementById("dice-container");
     const playerScoresContainer = document.getElementById("player-scores");
     const gameMessages = document.getElementById("game-messages");
-
+  
     playerNamesButton.addEventListener("click", function () {
-        const numPlayers = parseInt(numPlayersInput.value);
-        if (numPlayers < 1 || numPlayers > 4) {
-            alert("Please enter number of Players (1-4).");
-            return;
-        }
+      const numPlayers = parseInt(numPlayersInput.value);
+      if (numPlayers < 1 || numPlayers > 4) {
+        alert("Please enter number of Players (1-4).");
+        return;
+      }
 
-        // Clear any existing name inputs
+        // Clear existing name inputs
         nameInputsContainer.innerHTML = "";
 
-        // Create name inputs for each player
+        // Inputs for each player
         for (let i = 0; i < numPlayers; i++) {
             const nameInput = document.createElement("input");
             nameInput.type = "text";
             nameInput.placeholder = "Player " + (i + 1) + " name";
             nameInputsContainer.appendChild(nameInput);
         }
-
+        
+        //start button display and new line
         startGameButton.style.display = "block";
     });
 
+    //func will run when player click's
     startGameButton.addEventListener("click", function () {
         const nameInputs = nameInputsContainer.getElementsByTagName("input");
         for (let i = 0; i < nameInputs.length; i++) {
@@ -73,14 +75,37 @@ document.addEventListener("DOMContentLoaded", function () {
         updatePlayerScoresUI();
     
         if (playerScores[currentPlayer] >= 10000) {
-            gameMessages.textContent = playerNames[currentPlayer] + " wins the game!";
+            gameMessages.textContent = playerNames[currentPlayer]+ " wins the game!";
             rollButton.disabled = true;
+            newGameButton.style.display = "block";
             return;
         }
-    
+        //cycle through order of players turns
         currentPlayer = (currentPlayer + 1) % playerNames.length;
     });
     
+    // Reset the game and clear UI elements
+  function resetGame() {
+    playerNames.length = 0;
+    playerScores.length = 0;
+    currentPlayer = 0;
+    numPlayersInput.value = "";
+    nameInputsContainer.innerHTML = "";
+    gameMessages.textContent = "";
+    diceContainer.innerHTML = "";
+    playerScoresContainer.innerHTML = "";
+    numPlayersInput.style.display = "block";
+    playerNamesButton.style.display = "block";
+    rollButton.style.display = "none";
+    startGameButton.style.display = "none";
+    newGameButton.style.display = "none";
+    };
+
+
+  newGameButton.addEventListener("click", function () {
+    resetGame();
+  });
+
 
     function updateDiceUI(dice) {
         diceContainer.innerHTML = "";
@@ -97,7 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     
-
+    // dice [] stores values of rolled dice
+    //simulates random 6 dice roll
     function rollDice() {
         const dice = [];
         for (let i = 0; i < 6; i++) {
@@ -129,27 +155,26 @@ document.addEventListener("DOMContentLoaded", function () {
                     score += i * 100;
                 }
                 count[i] -= 3;
-            }
+            } 
         }
 
-        // condition - Scoring Three of a Kind of 2-5
         
-        if (count[2] >= 3) {
-            score += 200;
-            count[2] -= 3;
-        }
-        if (count[3] >= 3) {
-            score += 300;
-            count[3] -= 3;
-        }
-        if (count[4] >= 3) {
-            score += 400;
-            count[4] -= 3;
-        }
-        if (count[5] >= 3) {
-            score += 500;
-            count[5] -= 3;
-        }
+        // if (count[2] >= 3) {
+        //     score += 200;
+        //     count[2] -= 3;
+        // }
+        // if (count[3] >= 3) {
+        //     score += 300;
+        //     count[3] -= 3;
+        // }
+        // if (count[4] >= 3) {
+        //     score += 400;
+        //     count[4] -= 3;
+        // }
+        // if (count[5] >= 3) {
+        //     score += 500;
+        //     count[5] -= 3;
+        // }
 
         // Straight
         if (count.slice(1).every(val => val === 1)) {
@@ -172,9 +197,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePlayerScoresUI() {
         playerScoresContainer.innerHTML = "";
         for (let i = 0; i < playerNames.length; i++) {
-            const scoreElement = document.createElement("div");
-            scoreElement.textContent = playerNames[i] + ": " + playerScores[i];
-            playerScoresContainer.appendChild(scoreElement);
+          const scoreElement = document.createElement("div");
+          scoreElement.textContent = playerNames[i] + ": " + playerScores[i];
+          playerScoresContainer.appendChild(scoreElement);
         }
-    }
-});
+      }
+    });
