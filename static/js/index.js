@@ -13,11 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const diceContainer = document.getElementById("dice-container");
     const playerScoresContainer = document.getElementById("player-scores");
     const gameMessages = document.getElementById("game-messages");
+    // const newGameButton = document.getElementById("new-game-btn")
   
     playerNamesButton.addEventListener("click", function () {
       const numPlayers = parseInt(numPlayersInput.value);
       if (numPlayers < 1 || numPlayers > 4) {
-        alert("Please enter number of Players (1-4).");
+        // alert("Pleae select number of Players (1-4).");
         return;
       }
 
@@ -45,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Please enter names for all players!");
                 return;
             }
-            playerNames[i] = playerName;
-            playerScores[i] = 0;
+            playerNames[i] = "Player " + (i + 1) + "  _ " + playerName;
+            playerScores[i] = 0 ;
         }
 
         // Hide input fields and buttons
@@ -77,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (playerScores[currentPlayer] >= 10000) {
             gameMessages.textContent = playerNames[currentPlayer]+ " wins the game!";
             rollButton.disabled = true;
-            newGameButton.style.display = "block";
+            // newGameButton.style.display = "block";
             return;
         }
         //cycle through order of players turns
@@ -85,26 +86,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
     // Reset the game and clear UI elements
-  function resetGame() {
-    playerNames.length = 0;
-    playerScores.length = 0;
-    currentPlayer = 0;
-    numPlayersInput.value = "";
-    nameInputsContainer.innerHTML = "";
-    gameMessages.textContent = "";
-    diceContainer.innerHTML = "";
-    playerScoresContainer.innerHTML = "";
-    numPlayersInput.style.display = "block";
-    playerNamesButton.style.display = "block";
-    rollButton.style.display = "none";
-    startGameButton.style.display = "none";
-    newGameButton.style.display = "none";
-    };
+//   function resetGame() {
+//     playerNames.length = 0;
+//     playerScores.length = 0;
+//     currentPlayer = 0;
+//     numPlayersInput.value = "";
+//     nameInputsContainer.innerHTML = "";
+//     gameMessages.textContent = "";
+//     diceContainer.innerHTML = "";
+//     playerScoresContainer.innerHTML = "";
+//     numPlayersInput.style.display = "block";
+//     playerNamesButton.style.display = "block";
+//     rollButton.style.display = "none";
+//     startGameButton.style.display = "none";
+//     // newGameButton.style.display = "none";
+//     };
 
 
-  newGameButton.addEventListener("click", function () {
-    resetGame();
-  });
+// //   newGameButton.addEventListener("click", function () {
+// //     resetGame();
+// //   });
 
 
     function updateDiceUI(dice) {
