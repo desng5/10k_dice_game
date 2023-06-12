@@ -1,3 +1,5 @@
+
+//DOM - Doc Obj Model 
 document.addEventListener("DOMContentLoaded", function () {
     const playerNames = [];
     const playerScores = [];
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     playerNamesButton.addEventListener("click", function () {
         const numPlayers = parseInt(numPlayersInput.value);
         if (numPlayers < 1 || numPlayers > 4) {
-            alert("Please enter a number between 1 and 4 for the number of players.");
+            alert("Please enter number of Players (1-4).");
             return;
         }
 
@@ -79,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPlayer = (currentPlayer + 1) % playerNames.length;
     });
     
+
     function updateDiceUI(dice) {
         diceContainer.innerHTML = "";
         for (const value of dice) {
@@ -129,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        // Three of a Kind of 4 or 5
+        // condition - Scoring Three of a Kind of 2-5
         
         if (count[2] >= 3) {
             score += 200;
