@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const audioElement = new Audio("/static/audio/dice-142528.mp3");
 
     rollButton.addEventListener("click", function () {
-        // Play the dice roll sound
+
         audioElement.play();
       
         const dice = rollDice();
@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
         playerScores[currentPlayer] += score;
       
     
-        // Update UI
         updateDiceUI(dice);
         updatePlayerScoresUI();
       
@@ -114,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // //     resetGame();
 // //   });
 
-
+    //dice images
     function updateDiceUI(dice) {
         diceContainer.innerHTML = "";
         for (const value of dice) {
